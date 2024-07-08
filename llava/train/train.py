@@ -15,7 +15,7 @@
 #    limitations under the License.
 import sys
 
-sys.path.append("/home/ankit/CPT_VLM")
+sys.path.append("/home/avaidya7/CPT_VLM")
 import os
 import copy
 from dataclasses import dataclass, field
@@ -117,6 +117,8 @@ class TrainingArguments(transformers.TrainingArguments):
     )
     bits: int = field(default=16, metadata={"help": "How many bits to use."})
     lora_enable: bool = False
+    nola_enable: bool = False
+    nola_num_basis: int = 512
     lora_r: int = 64
     lora_alpha: int = 16
     lora_dropout: float = 0.05
@@ -975,6 +977,8 @@ def train(attn_implementation=None):
         from NOLA_peft.peft import LoraConfig, get_peft_model
 
         lora_config = LoraConfig(
+            use_nola=training_args.nola_enable,
+            nola_num_basis=training_args.nola_num_basis,
             r=training_args.lora_r,
             lora_alpha=training_args.lora_alpha,
             target_modules=find_all_linear_names(model),
@@ -1083,7 +1087,8 @@ def train(attn_implementation=None):
                 if hasattr(module, "weight"):
                     if training_args.bf16 and module.weight.dtype == torch.float32:
                         module = module.to(torch.bfloat16)
-
+    for name, param in model.named_parameters():
+        print(name, param.requires_grad)
     data_module = make_supervised_data_module(tokenizer=tokenizer, data_args=data_args)
     trainer = LLaVATrainer(
         model=model, tokenizer=tokenizer, args=training_args, **data_module
