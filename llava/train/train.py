@@ -45,6 +45,7 @@ from llava.mm_utils import tokenizer_image_token
 
 from PIL import Image
 
+os.environ["WANDB_PROJECT"] = "CPT_VLM"
 
 local_rank = None
 

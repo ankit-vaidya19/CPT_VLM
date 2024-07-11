@@ -1,0 +1,13 @@
+[2024-07-10 12:45:30,939] [INFO] [real_accelerator.py:161:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+/home/avaidya7/.conda/envs/llava/lib/python3.10/site-packages/huggingface_hub/file_download.py:1132: FutureWarning: `resume_download` is deprecated and will be removed in version 1.0.0. Downloads always resume when possible. If you want to force a new download, use `force_download=True`.
+  warnings.warn(
+Loading LLaVA from base model...
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]/home/avaidya7/.conda/envs/llava/lib/python3.10/site-packages/torch/_utils.py:831: UserWarning: TypedStorage is deprecated. It will be removed in the future and UntypedStorage will be the only storage class. This should only matter to you if you are using storages directly.  To access UntypedStorage directly, use tensor.untyped_storage() instead of tensor.storage()
+  return self.fget.__get__(instance, owner)()
+Loading checkpoint shards:  50%|█████     | 1/2 [00:00<00:00,  7.22it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:00<00:00,  8.32it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:00<00:00,  8.12it/s]
+Some non-default generation parameters are set in the model config. These should go into a GenerationConfig file (https://huggingface.co/docs/transformers/generation_strategies#save-a-custom-decoding-strategy-with-your-model) instead. This warning will be raised to an exception in v4.41.
+Non-default generation parameters: {'max_length': 4096}
+Loading additional LLaVA weights...
+Loading LoRA weights...
+Merging LoRA weights...
+Model is loaded...
